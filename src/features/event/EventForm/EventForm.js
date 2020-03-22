@@ -10,11 +10,22 @@ class EventForm extends Component {
     hostedBy:''
   };
 
+  componentDidMount(){
+    if(this.props.selectedEvent !== null){
+      this.setState({...this.props.selectedEvent})
+    }
+  }
+
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    this.props.createEvent(this.state)
+    if(this.state.id){
+      this.props.updateEvent(this.state)
+    }else{
+      this.props.createEvent(this.state)
+    }
   }
+
   handleInputs = event => {
     this.setState({[event.target.name]: event.target.value})
   };
@@ -51,7 +62,7 @@ class EventForm extends Component {
           <Button positive type='submit' onClick={this.handleFormSubmit}>
             Submit
           </Button>
-          <Button type='button' onClick={this.props.handleFormToggle}>
+          <Button type='button' onClick={this.props.cancelFormOpen}>
             Cancel
           </Button>
         </Form>
