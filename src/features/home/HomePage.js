@@ -11,7 +11,7 @@ const HomePage = (props) => {
                   alt='logo'
                   style={{ marginBottom: 12 }}
                 />
-                Re-vents
+                Attendo
               </Header>
               <Button onClick={() => props.history.push('/events')} size='huge' inverted>
                 Get started
