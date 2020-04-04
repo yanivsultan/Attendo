@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 class EventListItem extends Component {
   render() {
     const event = this.props.event;
+    console.log(event)
     return (
       <Segment.Group>
         <Segment>
@@ -21,8 +22,8 @@ class EventListItem extends Component {
         </Segment>
         <Segment>
           <span>
-            <Icon name='clock' /> {event.date} |
-            <Icon name='marker' /> {event.time}
+            <Icon name='clock' /> {event.date} {`|     `}  
+            <Icon name='marker' /> {event.venue}
           </span>
         </Segment>
         <Segment secondary>
