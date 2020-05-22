@@ -6,6 +6,7 @@ import TestPlaceInput from './TestPlaceInput';
 import SimpleMap from './simpleMap';
 import {geocodeByAddress, getLatLng} from 'react-places-autocomplete'
 import PlaceInput from '../../app/common/form/PlaceInput';
+import { openModal } from '../modals/modalActions'
 
 const mapState = (state) => ({
     data: state.test.data
@@ -13,7 +14,8 @@ const mapState = (state) => ({
 
 const actions = {
     incrementCounter,
-    decrementCounter
+    decrementCounter,
+    openModal
 }
 
 class TestComponents extends Component {
@@ -29,13 +31,14 @@ class TestComponents extends Component {
         })
     }
     render() {
-        const {data, incrementCounter, decrementCounter } = this.props;
+        const {data, incrementCounter, decrementCounter, openModal } = this.props;
         return (
             <div>
                 <h1>Test Component</h1>
                 <h3>The Answer is: {data}</h3>
                 <Button onClick={incrementCounter} positive content='increment'/>
                 <Button onClick={decrementCounter} negative content='decrement'/>
+                <Button onClick={() => openModal('TestModal', {data: 42 })} color='teal' content='Open Modal'/>
                 <br/>
                 <br/>
 
