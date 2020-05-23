@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { incrementCounter, decrementCounter } from './testActions'
+import { incrementAsync, decrementAsync } from './testActions'
 import { Button } from 'semantic-ui-react';
 import TestPlaceInput from './TestPlaceInput';
 import SimpleMap from './simpleMap';
@@ -9,12 +9,13 @@ import PlaceInput from '../../app/common/form/PlaceInput';
 import { openModal } from '../modals/modalActions'
 
 const mapState = (state) => ({
-    data: state.test.data
+    data: state.test.data,
+    loading: state.async.loading
 })
 
 const actions = {
-    incrementCounter,
-    decrementCounter,
+    incrementAsync,
+    decrementAsync,
     openModal
 }
 
@@ -31,13 +32,13 @@ class TestComponents extends Component {
         })
     }
     render() {
-        const {data, incrementCounter, decrementCounter, openModal } = this.props;
+        const {data, incrementAsync, decrementAsync, openModal, loading } = this.props;
         return (
             <div>
                 <h1>Test Component</h1>
                 <h3>The Answer is: {data}</h3>
-                <Button onClick={incrementCounter} positive content='increment'/>
-                <Button onClick={decrementCounter} negative content='decrement'/>
+                <Button loading={loading} onClick={incrementAsync} positive content='increment'/>
+                <Button loading={loading} onClick={decrementAsync} negative content='decrement'/>
                 <Button onClick={() => openModal('TestModal', {data: 42 })} color='teal' content='Open Modal'/>
                 <br/>
                 <br/>

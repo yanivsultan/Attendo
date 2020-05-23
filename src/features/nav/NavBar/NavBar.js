@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Menu, Container, Button } from "semantic-ui-react";
 import { NavLink, Link, withRouter } from "react-router-dom";
@@ -9,7 +9,7 @@ import { logout } from "../../auth/authActions";
 
 const actions = {
   openModal,
-  logout
+  logout,
 };
 
 const mapState = (state) => ({
@@ -17,7 +17,6 @@ const mapState = (state) => ({
 });
 
 class NavBar extends Component {
-  
   handleSignIn = () => {
     this.props.openModal("LoginModal");
   };
@@ -26,8 +25,8 @@ class NavBar extends Component {
   };
 
   handleSignOut = () => {
-    this.props.logout()
-    this.props.history.push('/');
+    this.props.logout();
+    this.props.history.push("/");
   };
 
   render() {
@@ -40,11 +39,20 @@ class NavBar extends Component {
             <img src='assets/logo.png' alt='logo' width='100px' />
           </Menu.Item>
           <Menu.Item as={NavLink} exact to='/events' name='Events' />
-          <Menu.Item as={NavLink} to='/people' name='People' />
-          <Menu.Item as={NavLink} to='/test' name='Test' />
-          <Menu.Item as={Link} to='/createEvent'>
-            <Button floated='right' positive inverted content='Create Event' />
-          </Menu.Item>
+          {authenticated && (
+            <Fragment>
+              <Menu.Item as={NavLink} to='/people' name='People' />
+              <Menu.Item as={NavLink} to='/test' name='Test' />
+              <Menu.Item as={Link} to='/createEvent'>
+                <Button
+                  floated='right'
+                  positive
+                  inverted
+                  content='Create Event'
+                />
+              </Menu.Item>
+            </Fragment>
+          )}
           {authenticated ? (
             <SignedInMenu
               signOut={this.handleSignOut}
